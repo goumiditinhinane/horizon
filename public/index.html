@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horizon Properties | Austin, Texas Premier Real Estate</title>
+  <meta name="description" content="Exclusive luxury residences, contemporary condos, and hillside acreage across Austin, Texas. Powered by Horizon Properties." />
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Styles (Strictly Navy Blue & White) -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Bar: Austin Exclusivity & Demo Switcher -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="atx-badge">★ Austin, TX Metro Only</span>
+      <span>Curated Residential, Waterfront & Architectural Real Estate</span>
+    </div>
+    <div class="top-bar-right">
+      <div class="demo-selector">
+        <label for="demo-user-select">Switch Persona:</label>
+        <select id="demo-user-select" title="Switch User Persona">
+          <option value="customer">👤 Customer: Sarah Miller</option>
+          <option value="admin">🏢 Company Admin (Horizon)</option>
+          <option value="guest">Guest (Logged Out)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar">
+    <div class="brand" id="brand-logo">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4" />
+          <path d="M9 9h1M9 13h1M9 17h1M14 13h1M14 17h1" />
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">HORIZON PROPERTIES</span>
+        <span class="brand-sub">Austin, Texas Exclusive</span>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+        <li>
+          <button class="nav-btn active" data-view="catalog" id="nav-catalog">
+            Explore Properties
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-view="my-bookings" id="nav-my-bookings">
+            My Bookings
+            <span class="nav-count-badge" id="my-bookings-count-badge" style="display: none;">0</span>
+          </button>
+        </li>
+        <!-- Admin link (only accessible / highlighted for company admin) -->
+        <li id="nav-admin-wrapper">
+          <button class="nav-btn" data-view="admin" id="nav-admin">
+            Admin Dashboard
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav-auth">
+      <!-- Shown when logged in -->
+      <div class="user-profile-pill" id="user-profile-pill" style="display: none;">
+        <div class="user-avatar" id="user-avatar-initial">S</div>
+        <div>
+          <span id="user-name-display">Sarah Miller</span>
+          <span class="user-role-tag" id="user-role-display">Customer</span>
+        </div>
+        <button class="btn-signout" id="btn-header-signout" title="Sign out">Sign Out</button>
+      </div>
+
+      <!-- Shown when logged out -->
+      <button class="btn btn-outline btn-sm" id="btn-show-login" style="display: none;">
+        Customer Sign In
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       VIEW 1: PUBLIC HOMEPAGE (PROPERTIES CATALOG)
+       ========================================== -->
+  <main id="catalog-view">
+    
+    <!-- Hero Section (Solid Navy & Crisp White) -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-tag">Austin, Texas Exclusive Portfolio</div>
+        <h1>Austin’s Premier Curated Properties</h1>
+        <p>
+          Discover exceptional modern condos, Hill Country villas, and urban estates across Austin’s most sought-after neighborhoods.
+        </p>
+
+        <!-- Quick Neighborhood Pill Filters -->
+        <div class="quick-neighborhoods">
+          <span class="quick-tag active" data-neighborhood="all">All Neighborhoods</span>
+          <span class="quick-tag" data-neighborhood="Downtown">Downtown</span>
+          <span class="quick-tag" data-neighborhood="South Congress">South Congress</span>
+          <span class="quick-tag" data-neighborhood="East Austin">East Austin</span>
+          <span class="quick-tag" data-neighborhood="Zilker">Zilker</span>
+          <span class="quick-tag" data-neighborhood="Domain Northside">Domain Northside</span>
+          <span class="quick-tag" data-neighborhood="Barton Hills">Barton Hills</span>
+          <span class="quick-tag" data-neighborhood="Mueller">Mueller</span>
+          <span class="quick-tag" data-neighborhood="Clarksville">Clarksville</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Combined Filters -->
+    <section class="search-container">
+      <div class="filter-card">
+        <div class="filter-grid">
+          
+          <!-- Search Keyword -->
+          <div class="filter-field">
+            <label class="filter-label" for="filter-search">Search Keyword or Address</label>
+            <div class="filter-input-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="filter-search" class="filter-control" placeholder="e.g. Congress, Zilker, pool, loft..." />
+            </div>
+          </div>
+
+          <!-- Property Type -->
+          <div class="filter-field">
+            <label class="filter-label" for="filter-type">Property Type</label>
+            <select id="filter-type" class="filter-control">
+              <option value="all">All Types</option>
+              <option value="House">House</option>
+              <option value="Condo">Condo</option>
+              <option value="Villa">Villa</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Townhouse">Townhouse</option>
+              <option value="Land">Land</option>
+            </select>
+          </div>
+
+          <!-- Austin Neighborhood -->
+          <div class="filter-field">
+            <label class="filter-label" for="filter-neighborhood">Austin Neighborhood</label>
+            <select id="filter-neighborhood" class="filter-control">
+              <option value="all">All Austin Areas</option>
+              <option value="Downtown">Downtown (78701)</option>
+              <option value="South Congress">South Congress / SoCo (78704)</option>
+              <option value="East Austin">East Austin (78702)</option>
+              <option value="Zilker">Zilker (78704)</option>
+              <option value="Domain Northside">Domain Northside (78758)</option>
+              <option value="Barton Hills">Barton Hills (78704/78746)</option>
+              <option value="Mueller">Mueller (78723)</option>
+              <option value="Hyde Park">Hyde Park (78751)</option>
+              <option value="Clarksville">Clarksville (78703)</option>
+              <option value="Tarrytown">Tarrytown (78703)</option>
+              <option value="Rainey Street">Rainey Street (78701)</option>
+              <option value="Bouldin Creek">Bouldin Creek (78704)</option>
+              <option value="West Lake Hills">West Lake Hills (78746)</option>
+            </select>
+          </div>
+
+          <!-- Price Range (Min & Max combined) -->
+          <div class="filter-field">
+            <label class="filter-label">Price Range (USD)</label>
+            <div class="price-range-group">
+              <input type="number" id="filter-min-price" class="filter-control" placeholder="Min $" step="50000" />
+              <input type="number" id="filter-max-price" class="filter-control" placeholder="Max $" step="50000" />
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="filter-actions">
+            <button class="btn btn-outline" id="btn-reset-filters" title="Reset all filters">
+              Reset
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Toolbar (Count, Sort, Grid/Table View) -->
+    <div class="results-toolbar">
+      <div class="results-count">
+        Showing <strong id="results-count-number">20</strong> properties in <strong>Austin, TX</strong>
+      </div>
+
+      <div class="toolbar-controls">
+        <select id="select-sort" class="sort-select">
+          <option value="newest">Sort: Newest Listed</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="oldest">Sort: Oldest</option>
+        </select>
+
+        <div class="view-toggle">
+          <button class="view-toggle-btn active" id="btn-view-grid" title="Card Grid View">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
+          <button class="view-toggle-btn" id="btn-view-table" title="Table View">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Properties Container (Cards or Table) -->
+    <div class="main-container">
+      <div id="properties-container" class="properties-grid">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==========================================
+       VIEW 2: DEDICATED CUSTOMER SIGN IN PAGE
+       ========================================== -->
+  <section id="signin-view" class="main-container" style="display: none;">
+    <div class="auth-page-wrap">
+      <div class="auth-header">
+        <h2>Customer Portal</h2>
+        <p>Sign in to schedule private tours and manage your saved reservations.</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="auth-page-tab-login">Sign In</button>
+        <button type="button" class="auth-tab-btn" id="auth-page-tab-register">Create Account</button>
+      </div>
+
+      <!-- Customer Sign In Form -->
+      <form id="form-page-login">
+        <div class="form-group">
+          <label class="form-label" for="auth-page-login-email">Customer Email Address</label>
+          <input type="email" id="auth-page-login-email" class="form-control" placeholder="e.g. sarah@atxlife.com" value="sarah@atxlife.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="auth-page-login-pass">Password (Optional for Demo)</label>
+          <input type="password" id="auth-page-login-pass" class="form-control" placeholder="••••••••" value="password123" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+          Sign In to Customer Account
+        </button>
+      </form>
+
+      <!-- Customer Registration Form -->
+      <form id="form-page-register" style="display: none;">
+        <div class="form-group">
+          <label class="form-label" for="auth-page-reg-name">Full Name *</label>
+          <input type="text" id="auth-page-reg-name" class="form-control" placeholder="e.g. Jessica Adams" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="auth-page-reg-email">Email Address *</label>
+          <input type="email" id="auth-page-reg-email" class="form-control" placeholder="jessica@austin.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="auth-page-reg-phone">Austin Phone Number *</label>
+          <input type="tel" id="auth-page-reg-phone" class="form-control" placeholder="(512) 555-0188" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+          Create Customer Account
+        </button>
+      </form>
+
+      <!-- Quick Demo Account Fillers -->
+      <div class="demo-account-box">
+        <h5>Quick Fill Demo Accounts</h5>
+        <div class="demo-pills">
+          <button type="button" class="btn-demo-fill" id="btn-fill-customer-demo">
+            👤 <strong>Customer: Sarah Miller</strong> (sarah@atxlife.com)
+          </button>
+          <button type="button" class="btn-demo-fill" id="btn-fill-admin-demo">
+            🏢 <strong>Admin: Horizon Management</strong> (admin@horizonproperties.com)
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       VIEW 3: CUSTOMER "MY BOOKINGS"
+       ========================================== -->
+  <section id="my-bookings-view" class="main-container" style="display: none; padding-top: 3rem;">
+    <div style="margin-bottom: 2rem;">
+      <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--navy-900); font-weight: 800;">My Tour Bookings & Reservations</h2>
+      <p style="color: var(--slate-600);">Review and manage your scheduled property tours in Austin, TX.</p>
+    </div>
+    
+    <div id="my-bookings-container">
+      <!-- Injected via JavaScript -->
+    </div>
+  </section>
+
+  <!-- ==========================================
+       VIEW 4: ADMIN DASHBOARD (ADMIN ONLY)
+       Includes full n8n & automation tools
+       ========================================== -->
+  <section id="admin-view" class="main-container admin-section" style="display: none; padding-top: 3rem;">
+    <div class="admin-header">
+      <h2>Horizon Properties Admin Portal</h2>
+      <p>Company Operations Center • Austin, Texas Metro Division</p>
+    </div>
+
+    <!-- KPI Metric Cards -->
+    <div class="stats-grid" id="admin-stats-grid">
+      <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Admin Navigation Tabs -->
+    <div class="admin-nav-tabs">
+      <button class="admin-tab-btn active" data-tab="properties">Manage Properties (CRUD)</button>
+      <button class="admin-tab-btn" data-tab="bookings">Manage Bookings</button>
+      <button class="admin-tab-btn" data-tab="n8n">⚡ n8n & Automation (Admin Only)</button>
+    </div>
+
+    <!-- Tab 1: Properties Table & CRUD -->
+    <div id="admin-tab-properties">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 style="font-size: 1.25rem; color: var(--navy-900);">All Austin Properties</h3>
+        <button class="btn btn-primary" id="btn-admin-add-prop">+ Add New Austin Property</button>
+      </div>
+      <div id="admin-properties-table-wrap" class="table-responsive">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Tab 2: Bookings Table -->
+    <div id="admin-tab-bookings" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 style="font-size: 1.25rem; color: var(--navy-900);">All Customer Tour Reservations</h3>
+      </div>
+      <div id="admin-bookings-table-wrap" class="table-responsive">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Tab 3: n8n Integration & API Guide (ADMIN EXCLUSIVE) -->
+    <div id="admin-tab-n8n" style="display: none;">
+      <div class="api-box">
+        <h3 style="font-size: 1.25rem; color: var(--navy-900); margin-bottom: 0.5rem;">n8n Automation & Webhook Integration</h3>
+        <p style="color: var(--slate-600); margin-bottom: 1.25rem;">
+          This automation suite is <strong>strictly restricted to administrators</strong>. Connect your n8n workflow HTTP Request nodes and external webhooks to these endpoints:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem;">
+          
+          <!-- GET Properties -->
+          <div style="border-left: 3px solid var(--navy-900); padding-left: 1rem;">
+            <div class="api-endpoint-header">
+              <span class="method-tag method-get">GET</span>
+              <span class="endpoint-path">http://localhost:3000/api/properties</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--slate-600);">
+              Search properties by combining query parameters: <code>type</code>, <code>min_price</code>, <code>max_price</code>, <code>neighborhood</code>, <code>status</code>.
+            </p>
+            <div class="curl-snippet">curl "http://localhost:3000/api/properties?neighborhood=Downtown&type=Condo&max_price=1000000"</div>
+          </div>
+
+          <!-- POST Booking -->
+          <div style="border-left: 3px solid var(--navy-900); padding-left: 1rem;">
+            <div class="api-endpoint-header">
+              <span class="method-tag method-post">POST</span>
+              <span class="endpoint-path">http://localhost:3000/api/bookings</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--slate-600);">
+              Creates a new customer tour booking for an Austin property. Auto-generates unique <code>BK-XXXX</code> ID.
+            </p>
+            <div class="curl-snippet">curl -X POST http://localhost:3000/api/bookings \
+  -H "Content-Type: application/json" \
+  -d '{"property_id":"HP-ATX-001","customer_name":"Alex Carter","customer_email":"alex@atx.com","customer_phone":"(512) 555-0199","booking_date":"2026-09-20","booking_time":"14:00","notes":"Interested in skyline views"}'</div>
+          </div>
+
+          <!-- Full CRUD Summary -->
+          <div style="border-left: 3px solid var(--navy-700); padding-left: 1rem;">
+            <h4 style="font-size: 0.95rem; color: var(--navy-900); margin-bottom: 0.5rem;">Full REST CRUD Endpoints for n8n</h4>
+            <ul style="font-size: 0.85rem; color: var(--slate-600); line-height: 1.8; margin-left: 1.25rem;">
+              <li><code>GET /api/properties/:id</code> — Single property details</li>
+              <li><code>POST /api/properties</code> — Create property listing</li>
+              <li><code>PUT /api/properties/:id</code> — Update property specifications or status</li>
+              <li><code>DELETE /api/properties/:id</code> — Delete property listing</li>
+              <li><code>GET /api/bookings?status=Pending</code> — Fetch pending customer visits</li>
+              <li><code>PUT /api/bookings/:id</code> — Confirm or cancel booking status</li>
+              <li><code>DELETE /api/bookings/:id</code> — Remove booking</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Interactive Testers (Inside Admin Only) -->
+        <h4 style="font-size: 1.1rem; color: var(--navy-900); margin-bottom: 1rem;">Interactive API Testing Playground</h4>
+        
+        <!-- Search Tester -->
+        <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div class="api-endpoint-header">
+            <span class="method-tag method-get">GET</span>
+            <span class="endpoint-path">/api/properties (Filterable Search Tester)</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin: 0.75rem 0;">
+            <div>
+              <label class="filter-label">Type</label>
+              <select id="api-test-type" class="filter-control">
+                <option value="all">Any</option>
+                <option value="Condo" selected>Condo</option>
+                <option value="House">House</option>
+                <option value="Villa">Villa</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Land">Land</option>
+              </select>
+            </div>
+            <div>
+              <label class="filter-label">Neighborhood</label>
+              <select id="api-test-neighborhood" class="filter-control">
+                <option value="all">Any</option>
+                <option value="Downtown" selected>Downtown</option>
+                <option value="South Congress">South Congress</option>
+                <option value="East Austin">East Austin</option>
+                <option value="Zilker">Zilker</option>
+              </select>
+            </div>
+            <div>
+              <label class="filter-label">Max Price</label>
+              <input type="number" id="api-test-max-price" class="filter-control" value="1500000" />
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-test-api-search">Execute GET Request</button>
+          <pre class="json-response-viewer" id="json-search-output">// Click 'Execute GET Request' to inspect live API output...</pre>
+        </div>
+
+        <!-- Booking Tester -->
+        <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 1.25rem;">
+          <div class="api-endpoint-header">
+            <span class="method-tag method-post">POST</span>
+            <span class="endpoint-path">/api/bookings (Create Booking Tester)</span>
+          </div>
+          <div class="form-group" style="margin: 0.75rem 0;">
+            <textarea id="api-test-booking-payload" class="form-control" rows="5" style="font-family: monospace; font-size: 0.82rem;">{
+  "property_id": "HP-ATX-001",
+  "customer_name": "Jordan Bell",
+  "customer_email": "jordan.bell@austintech.com",
+  "customer_phone": "(512) 555-8822",
+  "booking_date": "2026-09-25",
+  "booking_time": "14:00",
+  "notes": "Automated n8n webhook booking test."
+}</textarea>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-test-api-booking">Send Live POST Request</button>
+          <pre class="json-response-viewer" id="json-booking-output">// Click 'Send Live POST Request' to test booking creation...</pre>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ==========================================
+       MODALS
+       ========================================== -->
+
+  <!-- 1. Property Details Modal -->
+  <div class="modal-overlay" id="modal-property-details">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div class="modal-title">Property Specifications</div>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-property-content">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Booking / Reserve Modal -->
+  <div class="modal-overlay" id="modal-booking">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">Schedule a Private Tour / Reserve</div>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-booking">
+        <div class="modal-body">
+          
+          <!-- Property Preview Mini Card -->
+          <div style="display: flex; gap: 1rem; align-items: center; background: var(--slate-50); border: 1px solid var(--slate-200); padding: 0.85rem 1rem; border-radius: var(--radius-md); margin-bottom: 1.25rem;">
+            <img id="booking-prop-img" src="" alt="Property" style="width: 75px; height: 55px; object-fit: cover; border-radius: var(--radius-sm);" />
+            <div>
+              <input type="hidden" id="booking-prop-id" />
+              <h4 id="booking-prop-title" style="font-size: 0.95rem; font-weight: 700; color: var(--navy-900);">Title</h4>
+              <div id="booking-prop-address" style="font-size: 0.78rem; color: var(--slate-500);">Neighborhood • Address</div>
+              <div id="booking-prop-price" style="font-size: 0.9rem; font-weight: 800; color: var(--navy-900);">$0</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="booking-date">Preferred Visit Date *</label>
+              <input type="date" id="booking-date" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="booking-time">Preferred Time Slot *</label>
+              <select id="booking-time" class="form-control" required>
+                <option value="10:00 AM">10:00 AM (Morning)</option>
+                <option value="11:30 AM">11:30 AM (Morning)</option>
+                <option value="2:00 PM" selected>2:00 PM (Afternoon)</option>
+                <option value="3:30 PM">3:30 PM (Afternoon)</option>
+                <option value="5:00 PM">5:00 PM (Evening Sunset)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="booking-customer-name">Full Name *</label>
+            <input type="text" id="booking-customer-name" class="form-control" placeholder="e.g. Sarah Miller" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="booking-customer-email">Email Address *</label>
+              <input type="email" id="booking-customer-email" class="form-control" placeholder="name@domain.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="booking-customer-phone">Phone Number *</label>
+              <input type="tel" id="booking-customer-phone" class="form-control" placeholder="(512) 555-0100" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="booking-notes">Special Requests / Questions</label>
+            <textarea id="booking-notes" class="form-control" rows="3" placeholder="Tell our Austin agents about your financing status, timeline, or specific tour requests..."></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Tour Reservation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Admin Add / Edit Property Modal -->
+  <div class="modal-overlay" id="modal-edit-property">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-property-form-title">Add New Austin Property</div>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-property-edit">
+        <div class="modal-body">
+          <input type="hidden" id="form-prop-id" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="form-prop-title">Property Title *</label>
+              <input type="text" id="form-prop-title" class="form-control" placeholder="e.g. SoCo Modern Haven" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-prop-price">Price (USD) *</label>
+              <input type="number" id="form-prop-price" class="form-control" placeholder="1250000" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="form-prop-type">Property Type *</label>
+              <select id="form-prop-type" class="form-control" required>
+                <option value="House">House</option>
+                <option value="Condo">Condo</option>
+                <option value="Villa">Villa</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Land">Land</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-prop-neighborhood">Austin Neighborhood *</label>
+              <select id="form-prop-neighborhood" class="form-control" required>
+                <option value="Downtown">Downtown</option>
+                <option value="South Congress">South Congress</option>
+                <option value="East Austin">East Austin</option>
+                <option value="Zilker">Zilker</option>
+                <option value="Domain Northside">Domain Northside</option>
+                <option value="Barton Hills">Barton Hills</option>
+                <option value="Mueller">Mueller</option>
+                <option value="Hyde Park">Hyde Park</option>
+                <option value="Clarksville">Clarksville</option>
+                <option value="Tarrytown">Tarrytown</option>
+                <option value="Rainey Street">Rainey Street</option>
+                <option value="Bouldin Creek">Bouldin Creek</option>
+                <option value="West Lake Hills">West Lake Hills</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-prop-address">Austin Street Address & Zip *</label>
+            <input type="text" id="form-prop-address" class="form-control" placeholder="123 Congress Ave, Austin, TX 78701" required />
+          </div>
+
+          <div class="form-row" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="form-group">
+              <label class="form-label" for="form-prop-bedrooms">Bedrooms</label>
+              <input type="number" id="form-prop-bedrooms" class="form-control" value="3" min="0" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-prop-bathrooms">Bathrooms</label>
+              <input type="number" id="form-prop-bathrooms" class="form-control" value="2" step="0.5" min="0" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-prop-sqft">Area (SqFt)</label>
+              <input type="number" id="form-prop-sqft" class="form-control" value="2200" min="0" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="form-prop-image">Photo Image URL</label>
+              <input type="url" id="form-prop-image" class="form-control" placeholder="https://..." />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-prop-status">Status</label>
+              <select id="form-prop-status" class="form-control">
+                <option value="Available">Available</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Sold">Sold</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-prop-desc">Property Description</label>
+            <textarea id="form-prop-desc" class="form-control" rows="3" placeholder="Enter architectural and neighborhood details..."></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Property</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">HORIZON PROPERTIES</div>
+        <div style="font-size: 0.85rem; color: var(--slate-400); margin-top: 0.25rem;">
+          Exclusively Serving Austin, Texas • Downtown, SoCo, Zilker & Hill Country
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.5rem; font-size: 0.85rem;">
+        <span>Austin Metro Office: 200 Congress Ave, Austin, TX 78701</span>
+        <span>(512) 555-0100</span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <div>&copy; 2026 Horizon Properties LLC. All rights reserved. Equal Housing Opportunity.</div>
+      <div>Operating Exclusively in Austin, Texas</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+</body>
+</html>

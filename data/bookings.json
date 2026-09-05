@@ -1,0 +1,63 @@
+[
+  {
+    "id": "BK-1005",
+    "property_id": "HP-ATX-001",
+    "customer_name": "Sarah Miller",
+    "customer_email": "sarah@atxlife.com",
+    "customer_phone": "(512) 555-0142",
+    "booking_date": "2026-09-15",
+    "booking_time": "14:00",
+    "notes": "Testing browser verification flow",
+    "status": "Confirmed",
+    "created_at": "2026-09-05T15:44:18.207Z",
+    "updated_at": "2026-09-05T15:44:18.226Z"
+  },
+  {
+    "id": "BK-1001",
+    "property_id": "HP-ATX-001",
+    "customer_name": "Sarah Miller",
+    "customer_email": "sarah@atxlife.com",
+    "customer_phone": "(512) 555-0142",
+    "booking_date": "2026-09-12",
+    "booking_time": "14:00",
+    "notes": "Looking for downtown penthouse with balcony views for corporate relocation.",
+    "status": "Confirmed",
+    "created_at": "2026-09-02T10:15:00.000Z"
+  },
+  {
+    "id": "BK-1002",
+    "property_id": "HP-ATX-002",
+    "customer_name": "Marcus Vance",
+    "customer_email": "marcus.vance@techcorp.io",
+    "customer_phone": "(512) 555-0189",
+    "booking_date": "2026-09-14",
+    "booking_time": "10:30",
+    "notes": "Interested in SoCo architectural house. Moving from Silicon Valley next month.",
+    "status": "Pending",
+    "created_at": "2026-09-03T16:40:00.000Z"
+  },
+  {
+    "id": "BK-1003",
+    "property_id": "HP-ATX-004",
+    "customer_name": "Elena Rodriguez",
+    "customer_email": "elena.rodriguez@austinhealth.org",
+    "customer_phone": "(512) 555-0177",
+    "booking_date": "2026-09-15",
+    "booking_time": "15:00",
+    "notes": "Requesting private walk-through of the Zilker contemporary villa.",
+    "status": "Confirmed",
+    "created_at": "2026-09-04T09:20:00.000Z"
+  },
+  {
+    "id": "BK-1004",
+    "property_id": "HP-ATX-005",
+    "customer_name": "Sarah Miller",
+    "customer_email": "sarah@atxlife.com",
+    "customer_phone": "(512) 555-0142",
+    "booking_date": "2026-09-18",
+    "booking_time": "11:00",
+    "notes": "Exploring Domain Northside for investment lease portfolio.",
+    "status": "Pending",
+    "created_at": "2026-09-05T08:00:00.000Z"
+  }
+]
